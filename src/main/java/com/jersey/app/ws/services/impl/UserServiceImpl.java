@@ -4,6 +4,7 @@ package com.jersey.app.ws.services.impl;
 import com.jersey.app.ws.dto.UserDTO;
 import com.jersey.app.ws.services.UserService;
 import com.jersey.app.ws.utils.UserUtils;
+import org.springframework.beans.BeanUtils;
 
 public class UserServiceImpl implements UserService {
 
@@ -29,6 +30,9 @@ public class UserServiceImpl implements UserService {
         //Record data in database
 
         //Return user
+
+
+        BeanUtils.copyProperties(user,result);
         return result;
     }
 }
