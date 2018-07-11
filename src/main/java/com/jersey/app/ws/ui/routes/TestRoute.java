@@ -1,4 +1,4 @@
-package com.jersey.app.ws.ui.entrypoints;
+package com.jersey.app.ws.ui.routes;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
