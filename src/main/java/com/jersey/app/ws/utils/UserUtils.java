@@ -2,7 +2,7 @@ package com.jersey.app.ws.utils;
 
 import com.jersey.app.ws.dto.UserDTO;
 import com.jersey.app.ws.exceptions.MissingRequiredFieldException;
-import com.jersey.app.ws.ui.model.response.errors.ErrorMessages;
+import com.jersey.app.ws.exceptions.errors.ErrorMessages;
 
 
 public class UserUtils {

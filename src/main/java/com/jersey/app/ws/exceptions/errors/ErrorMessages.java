@@ -1,4 +1,4 @@
-package com.jersey.app.ws.ui.model.response.errors;
+package com.jersey.app.ws.exceptions.errors;
 
 public enum ErrorMessages {
     MISSING_REQUIRED_FIELD("Missing required field."),

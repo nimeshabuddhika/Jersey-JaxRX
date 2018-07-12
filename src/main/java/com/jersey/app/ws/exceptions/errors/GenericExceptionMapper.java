@@ -1,7 +1,5 @@
-package com.jersey.app.ws.exceptions;
+package com.jersey.app.ws.exceptions.errors;
 
-import com.jersey.app.ws.ui.model.response.errors.ErrorMessage;
-import com.jersey.app.ws.ui.model.response.errors.ErrorMessages;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -11,7 +9,7 @@ import javax.ws.rs.ext.Provider;
  * @author Nimesha Buddhika on 7/11/2018
  */
 @Provider
-public class GenericException implements ExceptionMapper<Throwable> {
+public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
 
     @Override
     public Response toResponse(Throwable throwable) {
