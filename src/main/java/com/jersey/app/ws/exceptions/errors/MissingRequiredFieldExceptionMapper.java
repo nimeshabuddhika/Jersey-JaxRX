@@ -17,6 +17,6 @@ public class MissingRequiredFieldExceptionMapper implements ExceptionMapper<Miss
 
     @Override
     public Response toResponse(MissingRequiredFieldException exception) {
-        return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorMessage(exception.getMessage(),ErrorMessages.MISSING_REQUIRED_FIELD.name(),"http://myapp.com/docs")).build();
+        return Response.status(Response.Status.BAD_REQUEST).entity(new ErrorMessageModel(exception.getMessage(),exception.getStackTrace()[0].getClassName(), exception.getStackTrace()[0].getLineNumber())).build();
     }
 }

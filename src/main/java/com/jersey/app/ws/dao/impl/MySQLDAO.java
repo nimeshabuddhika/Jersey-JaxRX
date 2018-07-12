@@ -4,6 +4,7 @@ import com.jersey.app.ws.dao.DAO;
 import com.jersey.app.ws.dto.UserDTO;
 import com.jersey.app.ws.entity.UserEntity;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.BeanUtils;
 
@@ -21,7 +22,8 @@ public class MySQLDAO implements DAO {
 
     @Override
     public void openConnection() {
-
+        //SessionFactory sessionFactory = HibernateUtills.getSessionFactory();
+        //session = sessionFactory.openSession();
     }
 
     @Override
@@ -51,6 +53,7 @@ public class MySQLDAO implements DAO {
 
     @Override
     public void closeConnection() {
-
+        if(session != null)
+            session.close();
     }
 }
