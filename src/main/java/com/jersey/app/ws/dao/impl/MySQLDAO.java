@@ -46,7 +46,6 @@ public class MySQLDAO implements DAO {
             userDto = new UserDTO();
             BeanUtils.copyProperties(userEntity, userDto);
         }
-
         return userDto;
     }
 

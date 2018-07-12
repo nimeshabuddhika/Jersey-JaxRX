@@ -4,7 +4,9 @@ package com.jersey.app.ws.services.impl;
 import com.jersey.app.ws.dao.DAO;
 import com.jersey.app.ws.dao.impl.MySQLDAO;
 import com.jersey.app.ws.dto.UserDTO;
+import com.jersey.app.ws.exceptions.MissingRequiredFieldException;
 import com.jersey.app.ws.services.UserService;
+import com.jersey.app.ws.ui.model.response.errors.ErrorMessages;
 import com.jersey.app.ws.utils.UserUtils;
 import org.springframework.beans.BeanUtils;
 
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
         //Check if user is exists
         UserDTO existingUser = this.getUserByUserName(user.getEmail());
         if(existingUser != null){
-//            throw UserServiceEx
+            throw new MissingRequiredFieldException(ErrorMessages.RECORD_ALREADY_EXISTS.name());
         }
 
         //Create an entity object
