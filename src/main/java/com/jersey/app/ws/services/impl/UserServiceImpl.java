@@ -2,6 +2,7 @@ package com.jersey.app.ws.services.impl;
 
 
 import com.jersey.app.ws.dao.DAO;
+import com.jersey.app.ws.dao.impl.MySQLDAO;
 import com.jersey.app.ws.dto.UserDTO;
 import com.jersey.app.ws.exceptions.CouldNotCreateException;
 import com.jersey.app.ws.services.UserService;
@@ -14,7 +15,7 @@ public class UserServiceImpl implements UserService {
     DAO database;
 
     public UserServiceImpl(){
-        //this.database = new MySQLDAO();
+        this.database = new MySQLDAO();
     }
 
     UserUtils userUtils = new UserUtils();
@@ -27,28 +28,30 @@ public class UserServiceImpl implements UserService {
         userUtils.validateRequiredFields(user);
 
         //Check if user is exists
-        /*UserDTO existingUser = this.getUserByUserName(user.getEmail());
+        UserDTO existingUser = this.getUserByUserName(user.getEmail());
         if(existingUser != null){
             throw new CouldNotCreateException(ErrorMessages.RECORD_ALREADY_EXISTS.name());
-        }*/
+        }
 
-        //Create an entity object
 
         //Generate secure public user id
+        String userId = new UserUtils().generatedUUID();
+        user.setUserId(userId);
 
         //Generate salt
+        String salt = userUtils.getSalt(30);
 
         //Generate secure password
+        String encPassword = userUtils.generateSecurePassword(userId,salt);
+        user.setSalt(salt);
+        user.setEncPassword(encPassword);
 
-        //Record data in database
-
-        //Return user
+        //Create an entity object
+        this.saveUser(user);
 
 
         BeanUtils.copyProperties(user,result);
-        throw new CouldNotCreateException(ErrorMessages.RECORD_ALREADY_EXISTS.getErrorMessage());
-        //throw new MissingRequiredFieldException(ErrorMessages.RECORD_ALREADY_EXISTS.name());
-        //return result;
+        return result;
     }
 
     private UserDTO getUserByUserName(String userName){
@@ -62,5 +65,18 @@ public class UserServiceImpl implements UserService {
             }
         }
         return user;
+    }
+
+    private UserDTO saveUser(UserDTO user) {
+        UserDTO returnValue = null;
+        // Connect to database
+        try {
+            this.database.openConnection();
+            returnValue = this.database.saveUser(user);
+        } finally {
+            this.database.closeConnection();
+        }
+
+        return returnValue;
     }
 }
