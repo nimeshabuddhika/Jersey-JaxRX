@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO createUser(UserDTO user) {
-        UserDTO result = new UserDTO();
+        UserDTO result;
 
         //Validate required fields
         userUtils.validateRequiredFields(user);
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         user.setEncPassword(encPassword);
 
         //Create an entity object
-        this.saveUser(user);
+        result = this.saveUser(user);
 
 
         BeanUtils.copyProperties(user,result);

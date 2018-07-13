@@ -3,7 +3,7 @@ package com.jersey.app.ws.dao.impl;
 import com.jersey.app.ws.dao.DAO;
 import com.jersey.app.ws.dto.UserDTO;
 import com.jersey.app.ws.entity.UserEntity;
-import com.jersey.app.ws.utils.HibernateUtils;
+import com.jersey.app.ws.utils.HibernateU;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -23,7 +23,7 @@ public class MySQLDAO implements DAO {
 
     @Override
     public void openConnection() {
-        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+        SessionFactory sessionFactory = HibernateU.getSessionFactory();
         session = sessionFactory.openSession();
     }
 
